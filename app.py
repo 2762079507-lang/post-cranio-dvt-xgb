@@ -191,7 +191,9 @@ TEXT = {
     },
 }
 
-LANG = st.sidebar.selectbox(TEXT["zh"]["lang_label"], ["中文", "English"], index=0)
+_lang_choice = st.sidebar.selectbox(TEXT["zh"]["lang_label"], ["中文", "English"], index=0)
+# map the displayed label to the TEXT dict key ("zh" / "en")
+LANG = "zh" if _lang_choice == "中文" else "en"
 t = TEXT[LANG]
 
 # ----------------------------------------------------------------------------
