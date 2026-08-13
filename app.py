@@ -74,8 +74,14 @@ def load_model():
         return pickle.load(f)
 
 
+model = load_model()
+
+
 @st.cache_resource
-def load_explainer(model):
+def load_explainer():
+    # 注意：不要将 model 作为缓存函数参数传入，
+    # 否则 Streamlit 会对 XGBoost 模型做哈希而抛 UnhashableParamError。
+    # 改为从模块全局变量引用。
     try:
         import shap
         return shap.TreeExplainer(model)
@@ -83,8 +89,7 @@ def load_explainer(model):
         return None
 
 
-model = load_model()
-explainer = load_explainer(model)
+explainer = load_explainer()
 
 
 # ----------------------------------------------------------------------------
