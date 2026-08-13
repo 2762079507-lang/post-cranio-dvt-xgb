@@ -211,9 +211,10 @@ if st.sidebar.button("🔍 预测风险 Predict Risk", type="primary"):
             ax.set_yticklabels(labels, fontsize=10)
             ax.invert_yaxis()
             ax.axvline(0, color="#475569", lw=0.8)
-            ax.set_xlabel("SHAP 贡献 (log-odds)", fontsize=9)
+            # Matplotlib 在 Streamlit Cloud 默认没有中文字体，使用英文标签避免乱码
+            ax.set_xlabel("SHAP contribution (log-odds)", fontsize=9)
             ax.set_title(
-                f"单例概率归因 · 基准 log-odds={base:.3f} → 预测概率={prob:.1%}",
+                f"Per-patient attribution · base log-odds={base:.3f} → predicted probability={prob:.1%}",
                 fontsize=10,
             )
             ax.spines[["top", "right"]].set_visible(False)
